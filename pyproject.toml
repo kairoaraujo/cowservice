@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cowservice"
+version = "0.1.0"
+description = "A FastAPI application for generating cowsay messages"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    {name = "Kairo de Araujo", email = "kairo@dearaujo.nl"}
+]
+keywords = ["fastapi", "cowsay", "api"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Framework :: FastAPI"
+]
+
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.6.0",
+    "cowsay>=6.0"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]

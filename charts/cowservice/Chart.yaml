@@ -1,0 +1,10 @@
+# Chart.yaml
+apiVersion: v2
+name: cowservice
+description: A Helm chart for Cowsay FastAPI Application with Nginx file serving
+version: 0.0.1
+appVersion: "0.1.0"
+dependencies:
+  - name: nginx
+    version: "15.3.0"
+    repository: "https://charts.bitnami.com/bitnami"
