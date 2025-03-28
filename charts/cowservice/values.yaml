@@ -20,7 +20,7 @@ service:
 nginx:
   image:
     repository: bitnami/nginx
-    tag: 1.27.4
+    tag: 1.25.5
     pullPolicy: IfNotPresent
   enabled: true
   service:

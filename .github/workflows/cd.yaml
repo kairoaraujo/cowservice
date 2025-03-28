@@ -31,7 +31,7 @@ jobs:
           pip install -r requirements.txt
           pip install cyclonedx-bom build
 
-      - name: Witness Run
+      - name: Witness in-toto build attestation
         uses: testifysec/witness-run-action@79320a907f611f2fb40ced8e13c66af988b2d9db
         with:
           step: build
@@ -40,7 +40,7 @@ jobs:
           command: python -m build --sdist --wheel --outdir dist/ .
           outfile: attestation-cowservice-build.json
 
-      - name: Witness Run
+      - name: Witness in-toto sbom attestation
         uses: testifysec/witness-run-action@79320a907f611f2fb40ced8e13c66af988b2d9db
         with:
           step: sbom
@@ -56,3 +56,61 @@ jobs:
           files: |
             *.json
             dist/*
+
+          # url: 'https://api.rstuf.kairo.dev/api/v1/artifacts/'
+          # method: 'POST'
+          # escapeData: 'true'
+          # data: >-
+          #   {
+          #     "targets": [
+          #       {
+          #         "info": {
+          #           "length": ${{ env.WHL_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.WHL_SHASUM }}"}
+          #         },
+          #         "path": "${{ github.ref_name }}/${{ env.WHL_NAME }}"
+          #       },
+          #       {
+          #         "info": {
+          #           "length": ${{ env.TAR_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.TAR_SHASUM }}"}
+          #       },
+          #         "path": "${{ github.ref_name }}/${{ env.TAR_NAME }}"
+          #       },
+          #       {
+          #         "info": {
+          #           "length": ${{ env.TAR_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.TAR_SHASUM }}"}
+          #       },
+          #         "path": "${{ env.TAR_NAME }}"
+          #       },
+          #       {
+          #         "info": {
+          #           "length": ${{ env.SBOM_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.SBOM_SHASUM }}"}
+          #       },
+          #         "path": "${{ github.ref_name }}/${{ env.SBOM_NAME }}"
+          #       },
+          #       {
+          #         "info": {
+          #           "length": ${{ env.SBOM_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.SBOM_SHASUM }}"}
+          #       },
+          #         "path": "${{ github.ref_name }}/sbom.json"
+          #       },
+          #       {
+          #         "info": {
+          #           "length": ${{ env.ATT_BUILD_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.ATT_BUILD_SHASUM }}"}
+          #       },
+          #         "path": "${{ github.ref_name }}/attestation-cowservice-build.json"
+          #       },
+          #       {
+          #         "info": {
+          #           "length": ${{ env.ATT_SBOM_LENGTH }},
+          #           "hashes": {"sha256": "${{ env.ATT_SBOM_SHASUM }}"}
+          #       },
+          #         "path": "${{ github.ref_name }}/attestation-cowservice-sbom.json"
+          #       }
+          #     ]
+          #   }
